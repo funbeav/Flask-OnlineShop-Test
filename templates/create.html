@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% if mode == 'create' %}
+<title>Добавление товара</title>
+{% else %}
+<title>Редактирование товара</title>
+{% endif %}
+
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    {% if mode == 'create' %}
+        <h1 class="display-4 fw-normal">Добавление товара</h1>
+    {% else %}
+        <h1 class="display-4 fw-normal">Редактирование товара</h1>
+    {% endif %}
+
+    <form method="post">
+        <input type="hidden" name="id" id="id" {% if item %} value={{ item.id }} {% endif %}>
+        <br><input type="text" class="form-control" name="title" id="title" style="width:50%;margin:auto;"
+                   placeholder="Введите название" {% if item %} value={{ item.title }} {% endif %}>
+        <br><input type="number" class="form-control" name="price" id="price" style="width:50%;margin:auto;"
+                   placeholder="Введите цену" {% if item %} value={{ item.price }} {% endif %}>
+        <br><button class="btn btn-success" type="submit">Сохранить</button>
+        {% if mode != 'create' %}
+            <a href="/delete/{{ item.id }}" type='submit' class="btn btn-warning" value='Delete'>Удалить</a>
+        {% endif %}
+    </form>
+</div>
+
+
+
+{% endblock %}
